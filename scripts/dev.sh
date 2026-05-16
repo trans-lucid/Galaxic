@@ -2,6 +2,11 @@
 set -euo pipefail
 
 if [ -f package.json ] && command -v jq >/dev/null 2>&1; then
+  if jq -e '.scripts["dev:app"]' package.json >/dev/null 2>&1; then
+    npm run dev:app
+    exit $?
+  fi
+
   DEV_SCRIPT="$(jq -r '.scripts.dev // empty' package.json)"
   if [ -n "$DEV_SCRIPT" ] \
     && [ "$DEV_SCRIPT" != "bash translucid/scripts/dev.sh" ] \

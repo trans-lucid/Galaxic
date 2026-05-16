@@ -325,9 +325,22 @@ async function writeCommandContracts(input: GenerateInput): Promise<void> {
         version: "0.1.0",
         private: true,
       };
+  const existingScripts = (packageJson.scripts as Record<string, string> | undefined) ?? {};
+
+  if (
+    existingScripts.test &&
+    existingScripts.test !== scripts.scripts.test &&
+    !existingScripts["test:app"]
+  ) {
+    existingScripts["test:app"] = existingScripts.test;
+  }
+
+  if (existingScripts.dev && existingScripts.dev !== scripts.scripts.dev && !existingScripts["dev:app"]) {
+    existingScripts["dev:app"] = existingScripts.dev;
+  }
 
   packageJson.scripts = {
-    ...((packageJson.scripts as Record<string, string> | undefined) ?? {}),
+    ...existingScripts,
     ...scripts.scripts,
   };
 
@@ -439,6 +452,17 @@ async function writeSafeExamples(input: GenerateInput): Promise<void> {
     path.join(input.targetRoot, "tests/public/README.md"),
     "Public tests belong here. Private evaluator and hidden tests must stay outside candidate-facing material.\n",
   );
+  const publicRunPath = path.join(input.targetRoot, "tests/public/run.sh");
+  await fsExtra.writeFile(
+    publicRunPath,
+    [
+      "#!/usr/bin/env bash",
+      "set -euo pipefail",
+      "echo \"No generated public tests have been added yet.\"",
+      "",
+    ].join("\n"),
+  );
+  await fsExtra.chmod(publicRunPath, 0o755);
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {

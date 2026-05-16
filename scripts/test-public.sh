@@ -3,7 +3,17 @@ set -euo pipefail
 
 echo "Running generated public tests"
 
+if [ -x tests/public/run.sh ]; then
+  bash tests/public/run.sh
+  exit $?
+fi
+
 if [ -f package.json ] && command -v jq >/dev/null 2>&1; then
+  if jq -e '.scripts["test:app"]' package.json >/dev/null 2>&1; then
+    npm run test:app
+    exit $?
+  fi
+
   TEST_SCRIPT="$(jq -r '.scripts.test // empty' package.json)"
   if [ -n "$TEST_SCRIPT" ] \
     && [ "$TEST_SCRIPT" != "bash translucid/scripts/test-public.sh" ] \

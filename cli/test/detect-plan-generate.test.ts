@@ -95,6 +95,7 @@ describe("v0.1 CLI flow", () => {
     expect(fs.existsSync(path.join(targetRoot, "compose.translucid.yml"))).toBe(true);
     expect(fs.existsSync(path.join(targetRoot, "translucid/scripts/env-start.sh"))).toBe(true);
     expect(fs.existsSync(path.join(targetRoot, "translucid/mocks/wiremock/mappings/health.json"))).toBe(true);
+    expect(fs.existsSync(path.join(targetRoot, "tests/public/run.sh"))).toBe(true);
 
     const environment = JSON.parse(
       fs.readFileSync(path.join(targetRoot, "translucid-environment.json"), "utf8"),
