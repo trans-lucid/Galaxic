@@ -2,7 +2,10 @@
 set -euo pipefail
 
 if [ -f package.json ] && command -v jq >/dev/null 2>&1; then
-  if jq -e '.scripts.dev' package.json >/dev/null 2>&1; then
+  DEV_SCRIPT="$(jq -r '.scripts.dev // empty' package.json)"
+  if [ -n "$DEV_SCRIPT" ] \
+    && [ "$DEV_SCRIPT" != "bash translucid/scripts/dev.sh" ] \
+    && [ "$DEV_SCRIPT" != "bash scripts/dev.sh" ]; then
     npm run dev
     exit $?
   fi
