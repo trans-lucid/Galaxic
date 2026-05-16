@@ -29,7 +29,9 @@ docker compose -f "$TARGET_DIR/compose.galaxic.yml" config >/dev/null
 npm --prefix "$TARGET_DIR" run test
 npm --prefix "$TARGET_DIR" run test:app
 npm --prefix "$TARGET_DIR" run candidate-safe-scan
+npm --prefix "$TARGET_DIR" run readiness
 
 node -e "const fs=require('fs'); const openapi=fs.readFileSync('$TARGET_DIR/api/openapi.yaml','utf8'); if(!openapi.includes('Galaxic Backend API Example')) throw new Error('source OpenAPI was not preserved');"
+node -e "const fs=require('fs'); const report=fs.readFileSync('$TARGET_DIR/galaxic-readiness-report.md','utf8'); if(!report.includes('Status: PASS')) throw new Error('readiness report did not pass');"
 
 echo "Backend example smoke test passed"
