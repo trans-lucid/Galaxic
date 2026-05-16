@@ -15,7 +15,8 @@
     "candidate-safe-scan": "bash scripts/candidate-safe-scan.sh",
     "secret-scan": "bash scripts/secret-scan.sh",
     "preflight": "bash scripts/preflight.sh",
-    "readiness": "bash scripts/readiness.sh"
+    "readiness": "bash scripts/readiness.sh",
+    "smoke:backend-example": "bash scripts/smoke-backend-example.sh"
   },
   "engines": {
     "node": ">=20.11"
