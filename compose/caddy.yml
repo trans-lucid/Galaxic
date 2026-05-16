@@ -6,4 +6,4 @@ services:
     ports:
       - "8088:80"
     networks:
-      - translucid
+      - galaxic

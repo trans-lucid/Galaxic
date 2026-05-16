@@ -14,11 +14,11 @@ export function validateManifestFiles(input: {
 }): ManifestValidationResult {
   const issues = [
     ...validateFile({
-      schemaPath: path.join(input.baseRoot, "schema/translucid-environment.schema.json"),
+      schemaPath: path.join(input.baseRoot, "schema/galaxic-environment.schema.json"),
       dataPath: input.environmentPath,
     }),
     ...validateFile({
-      schemaPath: path.join(input.baseRoot, "schema/translucid-preview.schema.json"),
+      schemaPath: path.join(input.baseRoot, "schema/galaxic-preview.schema.json"),
       dataPath: input.previewPath,
     }),
   ];

@@ -48,7 +48,7 @@ dev_commands:
   - pnpm dev
   - npm run dev
 generated_scripts:
-  test: bash translucid/scripts/test-public.sh
+  test: bash galaxic/scripts/test-public.sh
 candidate_safe: true
 notes:
   - Use pnpm if pnpm-lock.yaml exists.

@@ -1,11 +1,11 @@
 # Specialized Repo Creation
 
-Lucy must create focused repos, not generic bloated repos.
+Galaxic creates focused repos, not generic bloated repos.
 
 Example:
 
 ```bash
-translucid-env create \
+galaxic create \
   --role backend-api \
   --languages node-typescript,sql \
   --profiles backend-api,api-contract,security-readiness \
@@ -16,11 +16,11 @@ Generated repos should include:
 
 ```txt
 .devcontainer/devcontainer.json
-compose.translucid.yml
-translucid-environment.json
-translucid-preview.json
-translucid/scripts/*
-translucid/mocks/*
+compose.galaxic.yml
+galaxic-environment.json
+galaxic-preview.json
+galaxic/scripts/*
+galaxic/mocks/*
 tests/public/*
 README.md
 package.json or Makefile command contract

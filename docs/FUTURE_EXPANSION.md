@@ -4,10 +4,10 @@ After the first generated repo works end-to-end, expand carefully.
 
 Optional future packs:
 
-- `translucid-eval-cloud-pack`
-- `translucid-eval-data-ai-pack`
-- `translucid-eval-mobile-native-pack`
-- `translucid-eval-security-systems-pack`
+- `galaxic-cloud-pack`
+- `galaxic-data-ai-pack`
+- `galaxic-mobile-native-pack`
+- `galaxic-security-systems-pack`
 
 Do not split before v0.1 patterns are stable.
 

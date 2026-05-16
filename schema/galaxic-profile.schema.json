@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Translucid Domain Profile",
+  "title": "Galaxic Domain Profile",
   "type": "object",
   "required": [
     "id",

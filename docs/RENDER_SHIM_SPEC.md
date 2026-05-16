@@ -14,5 +14,5 @@ It must:
 - provide a fake deploy hook endpoint when useful
 - write `render-shim-report.md`
 
-Private evaluators may optionally run real Render smoke tests only with
-recruiter-approved credentials.
+Private automation may optionally run real Render smoke tests only with
+explicitly approved credentials.

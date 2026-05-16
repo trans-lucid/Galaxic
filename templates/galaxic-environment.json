@@ -1,5 +1,5 @@
 {
-  "environment_id": "lucy-eval-template",
+  "environment_id": "galaxic-template",
   "base_repo_version": "0.1.0",
   "mode": "dockerized",
   "candidate_safe": true,

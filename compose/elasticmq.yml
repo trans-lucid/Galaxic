@@ -5,4 +5,4 @@ services:
       - "9324:9324"
       - "9325:9325"
     networks:
-      - translucid
+      - galaxic

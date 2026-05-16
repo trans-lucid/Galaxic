@@ -3,5 +3,5 @@ terraform {
 }
 
 output "example" {
-  value = "translucid"
+  value = "galaxic"
 }

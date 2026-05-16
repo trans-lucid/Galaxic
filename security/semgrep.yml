@@ -1,5 +1,5 @@
 rules:
-  - id: translucid-no-production-env
+  - id: galaxic-no-production-env
     pattern: |
       $X = "production"
     message: Review hardcoded production string in candidate environment.

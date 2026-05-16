@@ -1,11 +1,11 @@
-name: translucid-eval
+name: galaxic
 
 networks:
-  translucid:
+  galaxic:
     driver: bridge
 
-x-translucid-defaults: &translucid-defaults
+x-galaxic-defaults: &galaxic-defaults
   networks:
-    - translucid
+    - galaxic
   labels:
-    com.translucid.environment: "true"
+    com.galaxic.environment: "true"

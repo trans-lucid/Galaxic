@@ -1,10 +1,10 @@
 {
-  "name": "@translucid/eval-base-cli",
+  "name": "@translucid/galaxic-cli",
   "version": "0.1.0",
-  "description": "CLI for generating focused Translucid evaluation environments.",
+  "description": "CLI for composing focused Galaxic job-specific environments.",
   "type": "module",
   "bin": {
-    "translucid-env": "./dist/index.js"
+    "galaxic": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",

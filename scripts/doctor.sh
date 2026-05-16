@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Translucid doctor check"
+echo "Galaxic doctor check"
 
 need() {
   if ! command -v "$1" >/dev/null 2>&1; then

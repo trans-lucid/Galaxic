@@ -16,7 +16,7 @@ if [ -f package.json ] && command -v jq >/dev/null 2>&1; then
 
   TEST_SCRIPT="$(jq -r '.scripts.test // empty' package.json)"
   if [ -n "$TEST_SCRIPT" ] \
-    && [ "$TEST_SCRIPT" != "bash translucid/scripts/test-public.sh" ] \
+    && [ "$TEST_SCRIPT" != "bash galaxic/scripts/test-public.sh" ] \
     && [ "$TEST_SCRIPT" != "bash scripts/test-public.sh" ]; then
     npm test
     exit $?

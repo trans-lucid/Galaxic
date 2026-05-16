@@ -53,13 +53,13 @@ describe("repository metadata", () => {
 
   it("keeps JSON templates parseable", () => {
     const files = [
-      "templates/translucid-environment.json",
-      "templates/translucid-preview.json",
-      "preview/translucid-preview.example.json",
-      "schema/translucid-environment.schema.json",
-      "schema/translucid-preview.schema.json",
-      "schema/translucid-language.schema.json",
-      "schema/translucid-profile.schema.json",
+      "templates/galaxic-environment.json",
+      "templates/galaxic-preview.json",
+      "preview/galaxic-preview.example.json",
+      "schema/galaxic-environment.schema.json",
+      "schema/galaxic-preview.schema.json",
+      "schema/galaxic-language.schema.json",
+      "schema/galaxic-profile.schema.json",
     ];
 
     for (const file of files) {

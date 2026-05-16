@@ -9,4 +9,4 @@ services:
     ports:
       - "4566:4566"
     networks:
-      - translucid
+      - galaxic

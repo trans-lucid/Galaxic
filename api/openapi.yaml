@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Translucid Example API
+  title: Galaxic Example API
   version: 0.1.0
 paths:
   /health:

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPORT="${1:-translucid-readiness-report.md}"
+REPORT="${1:-galaxic-readiness-report.md}"
 
 {
-  echo "# Translucid Readiness Report"
+  echo "# Galaxic Readiness Report"
   echo
   echo "Status: TODO"
   echo

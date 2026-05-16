@@ -6,4 +6,4 @@ services:
     volumes:
       - .:/home/jovyan/work
     networks:
-      - translucid
+      - galaxic

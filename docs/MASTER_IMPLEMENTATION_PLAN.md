@@ -2,10 +2,10 @@
 
 ## Objective
 
-Build `translucid-eval-base`, the public modular environment base Lucy uses to
-create focused, job-specific technical evaluation repositories.
+Build Galaxic as a public modular environment base: a reusable grammar for
+composing focused, job-specific repositories.
 
-The base repo must let Lucy compose:
+Galaxic must support:
 
 - language overlays
 - domain profiles
@@ -15,15 +15,15 @@ The base repo must let Lucy compose:
 - CI/CD dry-runs
 - deployment dry-runs
 - preview tabs
-- candidate safety checks
-- solve-first readiness gates
+- safety checks
+- readiness gates
 
 ## Architecture
 
 ### Layer 1: Core Runtime
 
 Dev Container base, Codespaces compatibility, Docker support, common scripts,
-Dagger scaffolding, local CI helpers, and safety checks.
+local CI helpers, Dagger scaffolding, manifest schemas, and safety checks.
 
 ### Layer 2: Language Overlays
 
@@ -33,7 +33,7 @@ and Ruby.
 
 ### Layer 3: Domain Profiles
 
-Profiles represent role-shaped environments:
+Profiles represent job-shaped environments:
 
 - `web-fullstack`
 - `backend-api`
@@ -50,10 +50,10 @@ Profiles represent role-shaped environments:
 
 ### Layer 4: Generated Repos
 
-Lucy generates candidate repos containing selected overlays, selected compose
-modules, a focused devcontainer, `compose.translucid.yml`,
-`translucid-environment.json`, `translucid-preview.json`, candidate scripts,
-safe mocks, public tests, and a candidate README.
+Generated repos contain selected overlays, selected Compose modules, a focused
+devcontainer, `compose.galaxic.yml`, `galaxic-environment.json`,
+`galaxic-preview.json`, command scripts, safe mocks, public tests, and a
+README.
 
 ## Fork / Use Policy
 
@@ -61,10 +61,10 @@ Do not fork major third-party projects by default. Use upstream projects as
 pinned images, pinned CLI releases, pinned package dependencies, Dev Container
 Features, thin wrappers, and generated local config.
 
-Fork only when Translucid needs an unavoidable patch, upstream licensing or
-packaging blocks candidate-safe use, the project is abandoned and critical,
-security hardening requires an internal variant, or deep product integration
-cannot be achieved through wrappers.
+Fork only when an unavoidable patch is needed, upstream licensing or packaging
+blocks safe use, the project is abandoned and critical, security hardening
+requires an internal variant, or deep product integration cannot be achieved
+through wrappers.
 
 ## v0.1 Priority
 

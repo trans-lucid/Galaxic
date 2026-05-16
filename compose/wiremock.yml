@@ -4,8 +4,8 @@ services:
     command:
       - --verbose
     volumes:
-      - ./translucid/mocks/wiremock:/home/wiremock
+      - ./galaxic/mocks/wiremock:/home/wiremock
     ports:
       - "8081:8080"
     networks:
-      - translucid
+      - galaxic

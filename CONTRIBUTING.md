@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions should improve the reusable base, not add interview-specific
+Contributions should improve the reusable base, not add job-specific private
 content.
 
 Allowed:
@@ -15,7 +15,7 @@ Allowed:
 
 Not allowed:
 
-- recruiter code
+- company-private code
 - hidden evaluator files
 - private solutions
 - real credentials

@@ -1,6 +1,6 @@
 # Build Complete: Next Steps
 
-The first serious milestone is a generated backend/full-stack candidate repo
+The first serious milestone is a generated backend/full-stack repo
 with:
 
 - Node/TypeScript
@@ -10,8 +10,8 @@ with:
 - Caddy
 - public tests
 - candidate README
-- `translucid-environment.json`
-- `translucid-preview.json`
+- `galaxic-environment.json`
+- `galaxic-preview.json`
 - secret scan
 - candidate-safe scan
 - readiness report

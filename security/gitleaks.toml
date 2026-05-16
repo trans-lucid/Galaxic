@@ -1,4 +1,4 @@
-title = "Translucid Gitleaks Config"
+title = "Galaxic Gitleaks Config"
 
 [allowlist]
 description = "Allow local dummy credentials only"

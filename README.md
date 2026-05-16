@@ -1,20 +1,21 @@
-# translucid-eval-base
+# Galaxic
 
-`translucid-eval-base` is the public modular environment base used by
-Translucid's Lucy to generate focused, candidate-ready technical evaluation
+Galaxic is a public modular environment base: a reusable environment grammar for
+composing language overlays, domain profiles, service modules, local emulators,
+mock APIs, safety checks, and preview metadata into small job-specific
 repositories.
 
-This repository is not an interview challenge by itself. It is a reusable
-environment grammar: Lucy composes language overlays, domain profiles, service
-modules, local emulators, mock APIs, safety checks, and preview metadata into a
-small job-specific repo.
+The repo is not a challenge, task, or application by itself. It is a clean base
+for generating focused local development and evaluation environments without
+shipping a giant always-on stack.
 
 ## Core Principle
 
-Generate the smallest useful environment for the role.
+Generate the smallest useful environment for the job.
 
-Do not create a giant always-on environment. Generated repos should include only
-the tools and services required for the challenge.
+Use only the tools and services required for the target workflow. A backend API
+repo should not inherit ML notebooks; an IaC repo should not inherit Storybook;
+a frontend repo should not boot LocalStack unless it needs it.
 
 ## v0.1 Scope
 
@@ -26,10 +27,10 @@ The first production slice supports:
   `security-readiness` profiles
 - Postgres, Redis, WireMock, Caddy, LocalStack, pgTAP placeholders, and local
   routing modules
-- `translucid-environment.json` and `translucid-preview.json` generation
+- `galaxic-environment.json` and `galaxic-preview.json` generation
 - candidate-safe scans, secret scans, readiness reports, and local preflight
 
-## Candidate Command Contract
+## Command Contract
 
 Every generated repo should expose:
 
@@ -44,18 +45,18 @@ npm run deploy:dry-run
 npm run doctor
 ```
 
-For non-Node targets, Lucy should also generate a `Makefile` with equivalent
-targets.
+For non-Node targets, generated repos should also include a `Makefile` with
+equivalent targets.
 
 ## Public Safety Rules
 
 This public repo must never include:
 
 - company source code
-- real interview tasks
+- private job tasks
 - hidden tests
 - private evaluator or solution material
-- candidate data
+- user or candidate data
 - production credentials or production `.env` files
 - service-account JSON
 - runtime artifacts containing secrets
@@ -71,11 +72,13 @@ node cli/dist/index.js create \
   --target ./tmp/generated-backend-eval
 ```
 
+The CLI also exposes the `galaxic` binary when installed from the workspace.
+
 ## Repository Layers
 
 1. Core runtime: Dev Containers, Codespaces compatibility, scripts, schemas, and
    security checks.
 2. Language overlays: detection and command metadata for common stacks.
-3. Domain profiles: role-shaped service and workflow bundles.
-4. Generated repos: focused candidate environments with public tests, safe
-   fixtures, local services, previews, and readiness reports.
+3. Domain profiles: job-shaped service and workflow bundles.
+4. Generated repos: focused environments with public tests, safe fixtures, local
+   services, previews, and readiness reports.

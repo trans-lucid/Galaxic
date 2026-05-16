@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - translucid
+      - galaxic
     healthcheck:
       test:
         - CMD-SHELL

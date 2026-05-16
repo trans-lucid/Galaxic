@@ -9,4 +9,4 @@ services:
       - "9000:9000"
       - "9001:9001"
     networks:
-      - translucid
+      - galaxic

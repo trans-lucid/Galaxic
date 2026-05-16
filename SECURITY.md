@@ -9,7 +9,7 @@ Never commit:
 - production credentials
 - service-account JSON
 - raw `.env` files
-- recruiter or candidate data
+- user or candidate data
 - company source code
 - hidden tests
 - private solutions
@@ -24,4 +24,4 @@ All generated candidate repositories must pass:
 
 Candidate mode must be local-first and credential-free unless a manifest
 explicitly declares otherwise. Credentialed tests belong only in private
-evaluator or Translucid control-plane contexts.
+evaluator or explicitly approved control-plane contexts.

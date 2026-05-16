@@ -1,6 +1,6 @@
-# Candidate Instructions
+# Generated Environment
 
-This is a Translucid evaluation environment.
+This is a Galaxic-generated environment.
 
 You do not need production credentials.
 
@@ -19,4 +19,4 @@ npm run test
 
 ## Local Services
 
-See `translucid-environment.json` and `translucid-preview.json`.
+See `galaxic-environment.json` and `galaxic-preview.json`.

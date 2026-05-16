@@ -19,8 +19,8 @@ const domainProfiles = loadDomainProfiles(baseRoot);
 const program = new Command();
 
 program
-  .name("translucid-env")
-  .description("Generate Translucid evaluation environments")
+  .name("galaxic")
+  .description("Compose focused Galaxic job-specific environments")
   .version("0.1.0");
 
 program
@@ -162,10 +162,10 @@ program
 
 program
   .command("validate")
-  .description("Validate Translucid environment and preview manifests")
+  .description("Validate Galaxic environment and preview manifests")
   .option("--cwd <dir>", "directory containing generated manifests", ".")
-  .option("--environment <file>", "environment manifest path", "translucid-environment.json")
-  .option("--preview <file>", "preview manifest path", "translucid-preview.json")
+  .option("--environment <file>", "environment manifest path", "galaxic-environment.json")
+  .option("--preview <file>", "preview manifest path", "galaxic-preview.json")
   .option("--json", "print machine-readable JSON")
   .action(
     (options: { cwd: string; environment: string; preview: string; json?: boolean }) =>
@@ -182,8 +182,8 @@ program
           Boolean(options.json),
           (value) =>
             value.valid
-              ? "Translucid manifests are valid"
-              : `Translucid manifests are invalid:\n${value.issues.join("\n")}`,
+              ? "Galaxic manifests are valid"
+              : `Galaxic manifests are invalid:\n${value.issues.join("\n")}`,
         );
 
         if (!result.valid) {
@@ -231,7 +231,7 @@ async function withCliErrors(action: () => Promise<void>): Promise<void> {
     await action();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error(`translucid-env: ${message}`);
+    console.error(`galaxic: ${message}`);
     process.exitCode = 1;
   }
 }
@@ -272,7 +272,7 @@ function formatPlan(plan: EnvironmentPlan): string {
 }
 
 function runScript(relativeScriptPath: string, cwd: string): void {
-  const scriptPath = path.join(cwd, "translucid", relativeScriptPath);
+  const scriptPath = path.join(cwd, "galaxic", relativeScriptPath);
   const fallbackScriptPath = path.join(cwd, relativeScriptPath);
   const resolvedScriptPath = pathExists(scriptPath) ? scriptPath : fallbackScriptPath;
   const result = spawnSync("bash", [resolvedScriptPath], {

@@ -37,7 +37,7 @@ export async function generateEnvironment(input: GenerateInput): Promise<void> {
   await writeDevcontainer(input);
   await writeCompose(input);
   await writeRouting(input);
-  await writeTranslucidAssets(input);
+  await writeGalaxicAssets(input);
   await writeManifests(input);
   await writeCommandContracts(input);
   await writeCandidateReadme(input);
@@ -101,7 +101,7 @@ async function writeDevcontainer(input: GenerateInput): Promise<void> {
     .sort((left, right) => left - right);
 
   const devcontainer = {
-    name: `Translucid ${input.plan.role}`,
+    name: `Galaxic ${input.plan.role}`,
     image: "mcr.microsoft.com/devcontainers/base:ubuntu",
     features: {
       "ghcr.io/devcontainers/features/common-utils:2": {},
@@ -118,7 +118,7 @@ async function writeDevcontainer(input: GenerateInput): Promise<void> {
         { label: label.replaceAll("_", " ") },
       ]),
     ),
-    postCreateCommand: "npm install || true; bash translucid/scripts/doctor.sh || true",
+    postCreateCommand: "npm install || true; bash galaxic/scripts/doctor.sh || true",
   };
 
   await writeJson(path.join(input.targetRoot, ".devcontainer/devcontainer.json"), devcontainer);
@@ -138,7 +138,7 @@ async function writeCompose(input: GenerateInput): Promise<void> {
   }
 
   await fsExtra.writeFile(
-    path.join(input.targetRoot, "compose.translucid.yml"),
+    path.join(input.targetRoot, "compose.galaxic.yml"),
     YAML.stringify(merged, { lineWidth: 100 }),
   );
 }
@@ -169,33 +169,33 @@ async function writeRouting(input: GenerateInput): Promise<void> {
   await fsExtra.copyFile(templatePath, outputPath);
 }
 
-async function writeTranslucidAssets(input: GenerateInput): Promise<void> {
-  const translucidRoot = path.join(input.targetRoot, "translucid");
-  await fsExtra.ensureDir(translucidRoot);
-  await fsExtra.ensureDir(path.join(translucidRoot, "scripts"));
+async function writeGalaxicAssets(input: GenerateInput): Promise<void> {
+  const galaxicRoot = path.join(input.targetRoot, "galaxic");
+  await fsExtra.ensureDir(galaxicRoot);
+  await fsExtra.ensureDir(path.join(galaxicRoot, "scripts"));
 
   for (const scriptName of GENERATED_SCRIPT_NAMES) {
     const sourcePath = path.join(input.baseRoot, "scripts", scriptName);
-    const targetPath = path.join(translucidRoot, "scripts", scriptName);
+    const targetPath = path.join(galaxicRoot, "scripts", scriptName);
     await fsExtra.copyFile(sourcePath, targetPath);
     await fsExtra.chmod(targetPath, 0o755);
   }
 
   await fsExtra.copy(
     path.join(input.baseRoot, "security"),
-    path.join(translucidRoot, "security"),
+    path.join(galaxicRoot, "security"),
     { overwrite: true },
   );
 
   await fsExtra.copy(
     path.join(input.baseRoot, "mocks/wiremock"),
-    path.join(translucidRoot, "mocks/wiremock"),
+    path.join(galaxicRoot, "mocks/wiremock"),
     { overwrite: true },
   );
 }
 
 async function writeManifests(input: GenerateInput): Promise<void> {
-  const environmentId = `translucid-${input.plan.role}`;
+  const environmentId = `galaxic-${input.plan.role}`;
   const environment = {
     environment_id: environmentId,
     base_repo_version: "0.1.0",
@@ -213,9 +213,9 @@ async function writeManifests(input: GenerateInput): Promise<void> {
     limitations: generatedLimitations(input.plan),
   };
 
-  await writeJson(path.join(input.targetRoot, "translucid-environment.json"), environment);
-  await writeJson(path.join(input.targetRoot, "translucid-preview.json"), buildPreview(input.plan));
-  await writeJson(path.join(input.targetRoot, "translucid/plan.json"), input.plan);
+  await writeJson(path.join(input.targetRoot, "galaxic-environment.json"), environment);
+  await writeJson(path.join(input.targetRoot, "galaxic-preview.json"), buildPreview(input.plan));
+  await writeJson(path.join(input.targetRoot, "galaxic/plan.json"), input.plan);
 }
 
 function generatedLimitations(plan: EnvironmentPlan): string[] {
@@ -321,7 +321,7 @@ async function writeCommandContracts(input: GenerateInput): Promise<void> {
   const packageJson = fs.existsSync(packageJsonPath)
     ? (JSON.parse(fs.readFileSync(packageJsonPath, "utf8")) as Record<string, unknown>)
     : {
-        name: `translucid-${input.plan.role}`,
+        name: `galaxic-${input.plan.role}`,
         version: "0.1.0",
         private: true,
       };
@@ -354,28 +354,28 @@ function buildMakefile(): string {
     ".PHONY: env-start env-stop env-reset dev test ci-local deploy-dry-run doctor",
     "",
     "env-start:",
-    "\tbash translucid/scripts/env-start.sh",
+    "\tbash galaxic/scripts/env-start.sh",
     "",
     "env-stop:",
-    "\tbash translucid/scripts/env-stop.sh",
+    "\tbash galaxic/scripts/env-stop.sh",
     "",
     "env-reset:",
-    "\tbash translucid/scripts/env-reset.sh",
+    "\tbash galaxic/scripts/env-reset.sh",
     "",
     "dev:",
-    "\tbash translucid/scripts/dev.sh",
+    "\tbash galaxic/scripts/dev.sh",
     "",
     "test:",
-    "\tbash translucid/scripts/test-public.sh",
+    "\tbash galaxic/scripts/test-public.sh",
     "",
     "ci-local:",
-    "\tbash translucid/scripts/ci-local.sh",
+    "\tbash galaxic/scripts/ci-local.sh",
     "",
     "deploy-dry-run:",
-    "\tbash translucid/scripts/deploy-dry-run.sh",
+    "\tbash galaxic/scripts/deploy-dry-run.sh",
     "",
     "doctor:",
-    "\tbash translucid/scripts/doctor.sh",
+    "\tbash galaxic/scripts/doctor.sh",
     "",
   ].join("\n");
 }
@@ -388,9 +388,9 @@ function buildEnvExample(plan: EnvironmentPlan): string {
 
 async function writeCandidateReadme(input: GenerateInput): Promise<void> {
   const readme = [
-    `# Translucid ${input.plan.role} Evaluation`,
+    `# Galaxic ${input.plan.role} Environment`,
     "",
-    "This generated environment is local-first and candidate-safe.",
+    "This generated environment is local-first and safety-checked.",
     "",
     "## Profiles",
     "",
@@ -415,7 +415,7 @@ async function writeCandidateReadme(input: GenerateInput): Promise<void> {
     "",
     "## Local Services",
     "",
-    "See `translucid-environment.json` and `translucid-preview.json`.",
+    "See `galaxic-environment.json` and `galaxic-preview.json`.",
     "",
   ].join("\n");
 
@@ -473,8 +473,8 @@ async function writeJson(filePath: string, value: unknown): Promise<void> {
 function validateGeneratedManifests(input: GenerateInput): void {
   const result = validateManifestFiles({
     baseRoot: input.baseRoot,
-    environmentPath: path.join(input.targetRoot, "translucid-environment.json"),
-    previewPath: path.join(input.targetRoot, "translucid-preview.json"),
+    environmentPath: path.join(input.targetRoot, "galaxic-environment.json"),
+    previewPath: path.join(input.targetRoot, "galaxic-preview.json"),
   });
 
   if (!result.valid) {

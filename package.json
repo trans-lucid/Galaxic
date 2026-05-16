@@ -1,7 +1,7 @@
 {
-  "name": "translucid-eval-base",
+  "name": "galaxic",
   "version": "0.1.0",
-  "description": "Public modular environment base for Translucid evaluation repos.",
+  "description": "Public modular environment grammar for composing focused job-specific repos.",
   "license": "MIT",
   "type": "module",
   "private": true,

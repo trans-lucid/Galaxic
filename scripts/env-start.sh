@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-COMPOSE_FILE="${COMPOSE_FILE:-compose.translucid.yml}"
+COMPOSE_FILE="${COMPOSE_FILE:-compose.galaxic.yml}"
 
 if [ ! -f "$COMPOSE_FILE" ]; then
   echo "No $COMPOSE_FILE found."
-  echo "Generate one with: translucid-env create --target ."
+  echo "Generate one with: galaxic create --target ."
   exit 1
 fi
 
