@@ -16,7 +16,8 @@
     "secret-scan": "bash scripts/secret-scan.sh",
     "preflight": "bash scripts/preflight.sh",
     "readiness": "bash scripts/readiness.sh",
-    "smoke:backend-example": "bash scripts/smoke-backend-example.sh"
+    "smoke:backend-example": "bash scripts/smoke-backend-example.sh",
+    "smoke:cloud-iac-example": "bash scripts/smoke-cloud-iac-example.sh"
   },
   "engines": {
     "node": ">=20.11"
