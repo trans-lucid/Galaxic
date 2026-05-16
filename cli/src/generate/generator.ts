@@ -509,6 +509,13 @@ function buildPublicTestScript(plan: EnvironmentPlan): string {
     lines.push("", "require_file infra/opentofu/main.tf");
   }
 
+  lines.push(
+    "",
+    "if node -e \"const pkg=require('./package.json'); process.exit(pkg.scripts?.['test:app'] ? 0 : 1)\"; then",
+    "  npm run test:app --silent",
+    "fi",
+  );
+
   lines.push("", "echo \"Galaxic public environment checks passed\"", "");
   return lines.join("\n");
 }

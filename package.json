@@ -17,7 +17,8 @@
     "preflight": "bash scripts/preflight.sh",
     "readiness": "bash scripts/readiness.sh",
     "smoke:backend-example": "bash scripts/smoke-backend-example.sh",
-    "smoke:cloud-iac-example": "bash scripts/smoke-cloud-iac-example.sh"
+    "smoke:cloud-iac-example": "bash scripts/smoke-cloud-iac-example.sh",
+    "smoke:warm-pool-scaling": "bash scripts/smoke-warm-pool-scaling.sh"
   },
   "engines": {
     "node": ">=20.11"
