@@ -1,0 +1,9 @@
+title = "Translucid Gitleaks Config"
+
+[allowlist]
+description = "Allow local dummy credentials only"
+regexes = [
+  '''AWS_ACCESS_KEY_ID=test''',
+  '''AWS_SECRET_ACCESS_KEY=test''',
+  '''postgres://postgres:postgres@'''
+]

@@ -1,0 +1,28 @@
+id: dotnet
+display_name: .NET / C#
+priority: 70
+detect:
+  files:
+    - global.json
+  extensions:
+    - .cs
+    - .csproj
+    - .sln
+  dependencies: []
+tools:
+  apt:
+    - dotnet-sdk-8.0
+test_commands:
+  preferred:
+    - dotnet test
+  fallback:
+    - dotnet test
+lint_commands:
+  - dotnet format --verify-no-changes
+build_commands:
+  - dotnet build
+dev_commands:
+  - dotnet run
+candidate_safe: true
+notes:
+  - Prefer existing solution files.

@@ -1,0 +1,23 @@
+{
+  "name": "translucid-eval-base",
+  "version": "0.1.0",
+  "description": "Public modular environment base for Translucid evaluation repos.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "cli"
+  ],
+  "scripts": {
+    "build": "npm --workspace cli run build",
+    "test": "npm --workspace cli run test",
+    "doctor": "bash scripts/doctor.sh",
+    "candidate-safe-scan": "bash scripts/candidate-safe-scan.sh",
+    "secret-scan": "bash scripts/secret-scan.sh",
+    "preflight": "bash scripts/preflight.sh",
+    "readiness": "bash scripts/readiness.sh"
+  },
+  "engines": {
+    "node": ">=20.11"
+  }
+}

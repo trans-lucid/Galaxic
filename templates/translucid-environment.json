@@ -1,0 +1,24 @@
+{
+  "environment_id": "lucy-eval-template",
+  "base_repo_version": "0.1.0",
+  "mode": "dockerized",
+  "candidate_safe": true,
+  "requires_real_credentials": false,
+  "detected_languages": [],
+  "profiles": [],
+  "services": [],
+  "ports": {},
+  "commands": {
+    "start": "npm run env:start",
+    "dev": "npm run dev",
+    "test_public": "npm run test",
+    "ci_local": "npm run ci:local",
+    "deploy_dry_run": "npm run deploy:dry-run"
+  },
+  "credential_policy": {
+    "candidate_credentials": "local-only",
+    "production_credentials_allowed": false,
+    "credentialed_private_smoke_test_allowed": false
+  },
+  "limitations": []
+}

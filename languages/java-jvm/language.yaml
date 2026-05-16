@@ -1,0 +1,34 @@
+id: java-jvm
+display_name: Java / JVM
+priority: 75
+detect:
+  files:
+    - pom.xml
+    - build.gradle
+    - build.gradle.kts
+    - settings.gradle
+    - settings.gradle.kts
+  extensions:
+    - .java
+  dependencies:
+    - spring-boot
+    - junit
+tools:
+  sdkman:
+    java: "21"
+test_commands:
+  preferred:
+    - ./gradlew test
+    - mvn test
+  fallback:
+    - ./gradlew test
+lint_commands: []
+build_commands:
+  - ./gradlew build
+  - mvn package
+dev_commands:
+  - ./gradlew bootRun
+  - mvn spring-boot:run
+candidate_safe: true
+notes:
+  - Prefer project wrapper scripts when present.

@@ -1,0 +1,22 @@
+id: swift-linux
+display_name: Swift on Linux
+priority: 45
+detect:
+  files:
+    - Package.swift
+  extensions:
+    - .swift
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - swift test
+  fallback: []
+lint_commands: []
+build_commands:
+  - swift build
+dev_commands:
+  - swift run
+candidate_safe: true
+notes:
+  - Linux-compatible Swift tasks only.

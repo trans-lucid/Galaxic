@@ -1,0 +1,56 @@
+id: node-typescript
+display_name: Node.js / TypeScript
+priority: 100
+detect:
+  files:
+    - package.json
+    - pnpm-lock.yaml
+    - yarn.lock
+    - package-lock.json
+    - tsconfig.json
+    - vite.config.ts
+    - vite.config.js
+    - next.config.js
+    - next.config.mjs
+  extensions:
+    - .js
+    - .jsx
+    - .ts
+    - .tsx
+  dependencies:
+    - typescript
+    - react
+    - next
+    - vite
+    - express
+    - fastify
+    - "@nestjs/core"
+tools:
+  mise:
+    node: "22"
+  npm_global:
+    - pnpm
+    - typescript
+test_commands:
+  preferred:
+    - pnpm test
+    - npm test
+    - yarn test
+  fallback:
+    - npx vitest run
+lint_commands:
+  - pnpm lint
+  - npm run lint
+build_commands:
+  - pnpm build
+  - npm run build
+dev_commands:
+  - pnpm dev
+  - npm run dev
+generated_scripts:
+  test: bash translucid/scripts/test-public.sh
+candidate_safe: true
+notes:
+  - Use pnpm if pnpm-lock.yaml exists.
+  - Use npm if package-lock.json exists.
+  - Use yarn if yarn.lock exists.

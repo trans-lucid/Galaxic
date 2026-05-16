@@ -1,0 +1,46 @@
+id: python
+display_name: Python
+priority: 95
+detect:
+  files:
+    - pyproject.toml
+    - requirements.txt
+    - setup.py
+    - setup.cfg
+    - uv.lock
+    - poetry.lock
+    - pytest.ini
+  extensions:
+    - .py
+    - .ipynb
+  dependencies:
+    - pytest
+    - fastapi
+    - django
+    - flask
+    - pandas
+    - pydantic
+tools:
+  mise:
+    python: "3.12"
+  pipx:
+    - uv
+    - ruff
+test_commands:
+  preferred:
+    - uv run pytest
+    - poetry run pytest
+    - pytest
+  fallback:
+    - python -m pytest
+lint_commands:
+  - uv run ruff check .
+  - ruff check .
+build_commands:
+  - python -m build
+dev_commands:
+  - uvicorn app.main:app --reload
+candidate_safe: true
+notes:
+  - Prefer uv when uv.lock exists.
+  - Use deterministic small fixtures for ML/LLM tasks.

@@ -1,0 +1,15 @@
+:80 {
+  handle_path /api/* {
+    reverse_proxy api:8080
+  }
+
+  handle_path /mock/* {
+    reverse_proxy wiremock:8080
+  }
+
+  handle_path /app/* {
+    reverse_proxy frontend:3000
+  }
+
+  respond /health "ok" 200
+}

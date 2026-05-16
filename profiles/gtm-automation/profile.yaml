@@ -1,0 +1,31 @@
+id: gtm-automation
+display_name: GTM Automation
+description: Revenue automation profile with workflow mocks, local CRM/email/webhook shims, and analytics fixtures.
+domains:
+  - automation
+  - integrations
+  - revenue
+required_languages: []
+optional_languages:
+  - node-typescript
+  - python
+compose_modules:
+  - base
+  - n8n
+  - mailhog
+  - wiremock
+ports:
+  n8n: 5678
+  mailhog: 8025
+  mock_api: 8081
+commands:
+  start: npm run env:start
+  test_public: npm run test
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - local webhook mocks reachable
+notes:
+  - Expansion profile.

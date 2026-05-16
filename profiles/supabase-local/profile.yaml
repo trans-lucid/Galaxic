@@ -1,0 +1,29 @@
+id: supabase-local
+display_name: Supabase Local
+description: Supabase CLI local stack for Postgres, Auth, Storage, Functions, and Studio tasks.
+domains:
+  - backend
+  - full-stack
+  - database
+required_languages: []
+optional_languages:
+  - node-typescript
+  - sql
+compose_modules:
+  - base
+ports:
+  supabase_api: 54321
+  supabase_studio: 54323
+commands:
+  start: npm run env:start
+  test_public: npm run test
+env:
+  SUPABASE_URL: http://localhost:54321
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - supabase local status succeeds
+notes:
+  - v0.1 generates scaffolding; full local stack validation lands after the backend slice.

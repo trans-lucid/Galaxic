@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Translucid Preview Manifest",
+  "type": "object",
+  "required": [
+    "tabs"
+  ],
+  "properties": {
+    "tabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "port",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "iframe",
+              "device-frame",
+              "logs",
+              "terminal",
+              "docs"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "private",
+              "organization",
+              "public"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

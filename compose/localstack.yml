@@ -1,0 +1,12 @@
+services:
+  localstack:
+    image: localstack/localstack:3.8
+    environment:
+      SERVICES: s3,sqs,sns,dynamodb,lambda,apigateway,events
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+    ports:
+      - "4566:4566"
+    networks:
+      - translucid

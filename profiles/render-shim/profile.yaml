@@ -1,0 +1,29 @@
+id: render-shim
+display_name: Render Shim
+description: Local validation and dry-run behavior for Render-style deployment configuration.
+domains:
+  - deployment
+  - devops
+required_languages: []
+optional_languages:
+  - node-typescript
+  - python
+  - go
+  - ruby
+compose_modules:
+  - base
+ports: {}
+commands:
+  deploy_dry_run: npm run deploy:dry-run
+  test_public: npm run test
+env:
+  RENDER: "true"
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - render.yaml parses
+  - deploy dry-run does not call Render API
+notes:
+  - Full render-shim generation is implemented after the first focused backend repo.

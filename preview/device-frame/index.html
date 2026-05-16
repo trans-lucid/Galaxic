@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Translucid Device Preview</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #15171a;
+      }
+
+      .phone {
+        width: min(390px, calc(100vw - 32px));
+        aspect-ratio: 390 / 844;
+        border: 14px solid #202329;
+        border-radius: 44px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 24px 80px rgb(0 0 0 / 45%);
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="phone" aria-label="Device preview">
+      <iframe id="preview" title="Preview"></iframe>
+    </main>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const url = params.get("url") || "about:blank";
+      document.getElementById("preview").src = url;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+id: api-contract
+display_name: API Contract
+description: OpenAPI, AsyncAPI, GraphQL, and gRPC mocks plus contract tests.
+domains:
+  - api
+  - microservices
+  - integrations
+required_languages: []
+optional_languages:
+  - node-typescript
+  - python
+  - java-jvm
+  - go
+compose_modules:
+  - base
+  - wiremock
+  - microcks
+  - caddy
+ports:
+  mock_api: 8081
+  microcks: 8585
+  router: 8088
+commands:
+  start: npm run env:start
+  test_public: npm run test
+  test_api: npm run test:api
+  test_contract: npm run test:contract
+env:
+  MOCK_API_URL: http://wiremock:8080
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - mock API reachable
+  - API contract tests run
+  - OpenAPI file validates

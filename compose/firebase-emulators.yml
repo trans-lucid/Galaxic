@@ -1,0 +1,16 @@
+services:
+  firebase-emulators:
+    image: node:22
+    working_dir: /workspace
+    command: bash -lc "npm install -g firebase-tools && firebase emulators:start --project demo-translucid --only auth,firestore,storage,functions,pubsub,hosting --host 0.0.0.0"
+    volumes:
+      - .:/workspace
+    ports:
+      - "4000:4000"
+      - "9099:9099"
+      - "8080:8080"
+      - "9199:9199"
+      - "5001:5001"
+      - "8085:8085"
+    networks:
+      - translucid

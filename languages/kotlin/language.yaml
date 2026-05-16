@@ -1,0 +1,22 @@
+id: kotlin
+display_name: Kotlin
+priority: 50
+detect:
+  files:
+    - build.gradle.kts
+  extensions:
+    - .kt
+    - .kts
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - ./gradlew test
+  fallback: []
+lint_commands: []
+build_commands:
+  - ./gradlew build
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay; JVM wrapper support is shared with java-jvm.

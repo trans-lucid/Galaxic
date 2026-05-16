@@ -1,0 +1,30 @@
+id: ruby
+display_name: Ruby
+priority: 65
+detect:
+  files:
+    - Gemfile
+    - Gemfile.lock
+    - Rakefile
+  extensions:
+    - .rb
+  dependencies:
+    - rails
+    - rspec
+tools:
+  mise:
+    ruby: "3.3"
+test_commands:
+  preferred:
+    - bundle exec rspec
+    - bundle exec rake test
+  fallback:
+    - bundle exec rake test
+lint_commands: []
+build_commands:
+  - bundle install
+dev_commands:
+  - bin/rails server -b 0.0.0.0
+candidate_safe: true
+notes:
+  - Rails tasks should use local Postgres/Redis modules.

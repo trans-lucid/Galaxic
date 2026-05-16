@@ -1,0 +1,25 @@
+id: security-readiness
+display_name: Security Readiness
+description: Candidate-safe scans, secret scans, SAST, dependency scanning, and IaC scanning.
+domains:
+  - security
+  - appsec
+  - all
+required_languages: []
+optional_languages: []
+compose_modules:
+  - base
+ports: {}
+commands:
+  secret_scan: npm run secret-scan
+  candidate_safe_scan: npm run candidate-safe-scan
+  security_scan: npm run security:scan
+  test_public: npm run test
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - gitleaks scan passes
+  - private material scan passes
+  - candidate-safe scan passes

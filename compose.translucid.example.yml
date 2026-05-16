@@ -1,0 +1,6 @@
+include:
+  - ./compose/base.yml
+  - ./compose/postgres.yml
+  - ./compose/redis.yml
+  - ./compose/wiremock.yml
+  - ./compose/caddy.yml

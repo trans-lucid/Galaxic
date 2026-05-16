@@ -1,0 +1,34 @@
+id: data-sql
+display_name: Data / SQL
+description: SQL, migrations, pgTAP, dbt, database functions, and data-quality challenges.
+domains:
+  - sql
+  - database
+  - data-engineering
+required_languages:
+  - sql
+optional_languages:
+  - python
+compose_modules:
+  - base
+  - postgres
+  - postgres-pgtap
+ports:
+  postgres: 5432
+commands:
+  start: npm run env:start
+  migrate: npm run db:migrate
+  seed: npm run db:seed
+  test_public: npm run test
+  test_sql: npm run test:sql
+env:
+  DATABASE_URL: postgres://postgres:postgres@postgres:5432/app
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - database reachable
+  - migrations run
+  - seed data loads
+  - pgTAP or dbt tests run

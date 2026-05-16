@@ -1,0 +1,29 @@
+id: ml-llm-light
+display_name: ML / LLM Light
+description: Lightweight local ML and LLM application profile with deterministic fixtures and mock providers.
+domains:
+  - ml
+  - llm
+  - data
+required_languages:
+  - python
+optional_languages:
+  - node-typescript
+compose_modules:
+  - base
+  - jupyterlab
+  - mlflow
+ports:
+  jupyterlab: 8888
+  mlflow: 5000
+commands:
+  start: npm run env:start
+  test_public: npm run test
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - deterministic mock LLM provider configured
+notes:
+  - Expansion profile.

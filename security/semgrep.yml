@@ -1,0 +1,10 @@
+rules:
+  - id: translucid-no-production-env
+    pattern: |
+      $X = "production"
+    message: Review hardcoded production string in candidate environment.
+    languages:
+      - javascript
+      - typescript
+      - python
+    severity: WARNING

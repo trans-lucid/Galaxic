@@ -1,0 +1,28 @@
+id: design-frontend
+display_name: Design Frontend
+description: Component implementation, visual QA, Storybook, Playwright, and responsive preview workflows.
+domains:
+  - frontend
+  - design-engineering
+required_languages:
+  - node-typescript
+optional_languages: []
+compose_modules:
+  - base
+  - caddy
+ports:
+  frontend: 3000
+  storybook: 6006
+commands:
+  start: npm run env:start
+  dev: npm run dev
+  test_public: npm run test
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - storybook or app preview reachable
+  - public visual tests run when present
+notes:
+  - Expansion profile.

@@ -1,0 +1,11 @@
+name: translucid-eval
+
+networks:
+  translucid:
+    driver: bridge
+
+x-translucid-defaults: &translucid-defaults
+  networks:
+    - translucid
+  labels:
+    com.translucid.environment: "true"

@@ -1,0 +1,23 @@
+id: r
+display_name: R
+priority: 40
+detect:
+  files:
+    - DESCRIPTION
+    - renv.lock
+  extensions:
+    - .R
+    - .r
+    - .Rmd
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - Rscript -e 'testthat::test_dir("tests")'
+  fallback: []
+lint_commands: []
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay for data tasks.

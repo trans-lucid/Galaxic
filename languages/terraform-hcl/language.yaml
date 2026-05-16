@@ -1,0 +1,35 @@
+id: terraform-hcl
+display_name: Terraform / OpenTofu / HCL
+priority: 90
+detect:
+  files:
+    - main.tf
+    - variables.tf
+    - outputs.tf
+    - versions.tf
+    - tofu.lock.hcl
+    - .terraform.lock.hcl
+  extensions:
+    - .tf
+    - .tofu
+    - .hcl
+  dependencies: []
+tools:
+  mise:
+    opentofu: latest
+    terraform: "1"
+test_commands:
+  preferred:
+    - tofu validate
+    - tofu test
+    - npm run infra:plan:local
+  fallback:
+    - tofu validate
+lint_commands:
+  - tofu fmt -check
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Prefer OpenTofu for open-source IaC tasks.
+  - Use LocalStack for AWS-like local resources.

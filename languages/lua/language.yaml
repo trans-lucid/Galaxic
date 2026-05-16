@@ -1,0 +1,20 @@
+id: lua
+display_name: Lua
+priority: 35
+detect:
+  files:
+    - rockspec
+  extensions:
+    - .lua
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - busted
+  fallback: []
+lint_commands: []
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.

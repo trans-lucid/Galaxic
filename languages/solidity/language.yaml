@@ -1,0 +1,26 @@
+id: solidity
+display_name: Solidity
+priority: 35
+detect:
+  files:
+    - foundry.toml
+    - hardhat.config.ts
+    - hardhat.config.js
+  extensions:
+    - .sol
+  dependencies:
+    - hardhat
+    - forge
+tools: {}
+test_commands:
+  preferred:
+    - forge test
+    - npx hardhat test
+  fallback: []
+lint_commands: []
+build_commands:
+  - forge build
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay. Never require wallet or mainnet credentials in candidate mode.

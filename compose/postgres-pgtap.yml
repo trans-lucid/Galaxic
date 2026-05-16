@@ -1,0 +1,3 @@
+# Full pgTAP image selection is profile-owned. The generator can merge this
+# module with postgres.yml and add init SQL once the data-sql slice is active.
+services: {}

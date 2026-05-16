@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Translucid Domain Profile",
+  "type": "object",
+  "required": [
+    "id",
+    "display_name",
+    "description",
+    "domains",
+    "compose_modules",
+    "commands",
+    "credential_policy",
+    "readiness_checks"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "optional_languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compose_modules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ports": {
+      "type": "object"
+    },
+    "commands": {
+      "type": "object"
+    },
+    "env": {
+      "type": "object"
+    },
+    "files_to_generate": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "test_templates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluator_guidance": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "candidate_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "credential_policy": {
+      "type": "object"
+    },
+    "readiness_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

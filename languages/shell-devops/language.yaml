@@ -1,0 +1,25 @@
+id: shell-devops
+display_name: Shell / DevOps scripting
+priority: 80
+detect:
+  files:
+    - Makefile
+  extensions:
+    - .sh
+    - .bash
+  dependencies: []
+tools:
+  apt:
+    - shellcheck
+test_commands:
+  preferred:
+    - bats tests
+  fallback:
+    - shellcheck scripts/*.sh
+lint_commands:
+  - shellcheck scripts/*.sh
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Use Bats when shell tests exist.

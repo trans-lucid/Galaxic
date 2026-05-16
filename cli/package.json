@@ -1,0 +1,28 @@
+{
+  "name": "@translucid/eval-base-cli",
+  "version": "0.1.0",
+  "description": "CLI for generating focused Translucid evaluation environments.",
+  "type": "module",
+  "bin": {
+    "translucid-env": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "globby": "^14.0.2",
+    "yaml": "^2.6.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.6"
+  }
+}

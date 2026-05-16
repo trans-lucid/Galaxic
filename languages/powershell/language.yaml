@@ -1,0 +1,20 @@
+id: powershell
+display_name: PowerShell
+priority: 45
+detect:
+  files: []
+  extensions:
+    - .ps1
+    - .psm1
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - pwsh -Command Invoke-Pester
+  fallback: []
+lint_commands: []
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.

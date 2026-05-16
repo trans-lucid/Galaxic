@@ -1,0 +1,22 @@
+id: scala
+display_name: Scala
+priority: 50
+detect:
+  files:
+    - build.sbt
+  extensions:
+    - .scala
+    - .sc
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - sbt test
+  fallback: []
+lint_commands: []
+build_commands:
+  - sbt compile
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.

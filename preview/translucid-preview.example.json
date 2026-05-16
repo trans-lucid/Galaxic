@@ -1,0 +1,33 @@
+{
+  "tabs": [
+    {
+      "id": "app",
+      "label": "App",
+      "port": 3000,
+      "kind": "iframe",
+      "path": "/",
+      "visibility": "private"
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile Preview",
+      "port": 3000,
+      "kind": "device-frame",
+      "device": "iphone-15",
+      "path": "/"
+    },
+    {
+      "id": "api-docs",
+      "label": "API Docs",
+      "port": 8080,
+      "kind": "iframe",
+      "path": "/docs"
+    },
+    {
+      "id": "mock-api",
+      "label": "Mock API",
+      "port": 8081,
+      "kind": "iframe"
+    }
+  ]
+}

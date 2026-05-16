@@ -1,0 +1,49 @@
+id: web-fullstack
+display_name: Web Full-Stack
+description: Frontend, backend, API routes, local database, browser tests, and preview tabs.
+domains:
+  - frontend
+  - backend
+  - full-stack
+  - product-engineering
+required_languages:
+  - node-typescript
+optional_languages:
+  - python
+  - sql
+compose_modules:
+  - base
+  - postgres
+  - redis
+  - wiremock
+  - caddy
+ports:
+  frontend: 3000
+  vite: 5173
+  storybook: 6006
+  api: 8080
+  mock_api: 8081
+  router: 8088
+  postgres: 5432
+  redis: 6379
+commands:
+  start: npm run env:start
+  dev: npm run dev
+  test_public: npm run test
+  e2e: npm run test:e2e
+  ci_local: npm run ci:local
+env:
+  DATABASE_URL: postgres://postgres:postgres@postgres:5432/app
+  REDIS_URL: redis://redis:6379
+  MOCK_API_URL: http://wiremock:8080
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - env starts
+  - frontend port responds
+  - api port responds
+  - public tests run
+  - preview manifest exists
+  - secret scan passes

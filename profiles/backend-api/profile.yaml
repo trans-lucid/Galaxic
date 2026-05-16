@@ -1,0 +1,50 @@
+id: backend-api
+display_name: Backend API
+description: REST, GraphQL, or service APIs with a database, mocked dependencies, and integration tests.
+domains:
+  - backend
+  - api
+  - service-integration
+required_languages: []
+optional_languages:
+  - node-typescript
+  - python
+  - java-jvm
+  - go
+  - rust
+  - dotnet
+  - php
+  - ruby
+  - sql
+compose_modules:
+  - base
+  - postgres
+  - redis
+  - wiremock
+  - caddy
+ports:
+  api: 8080
+  mock_api: 8081
+  router: 8088
+  postgres: 5432
+  redis: 6379
+commands:
+  start: npm run env:start
+  dev: npm run dev
+  test_public: npm run test
+  test_api: npm run test:api
+  ci_local: npm run ci:local
+env:
+  DATABASE_URL: postgres://postgres:postgres@postgres:5432/app
+  REDIS_URL: redis://redis:6379
+  MOCK_API_URL: http://wiremock:8080
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - api health check passes
+  - public tests run
+  - mocked dependency reachable
+  - database reachable
+  - secret scan passes

@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "env:start": "bash translucid/scripts/env-start.sh",
+    "env:stop": "bash translucid/scripts/env-stop.sh",
+    "env:reset": "bash translucid/scripts/env-reset.sh",
+    "dev": "bash translucid/scripts/dev.sh",
+    "test": "bash translucid/scripts/test-public.sh",
+    "test:public": "bash translucid/scripts/test-public.sh",
+    "test:sql": "bash translucid/scripts/test-sql.sh",
+    "test:api": "bash translucid/scripts/test-api.sh",
+    "test:infra": "bash translucid/scripts/test-infra.sh",
+    "ci:local": "bash translucid/scripts/ci-local.sh",
+    "deploy:dry-run": "bash translucid/scripts/deploy-dry-run.sh",
+    "doctor": "bash translucid/scripts/doctor.sh",
+    "preflight": "bash translucid/scripts/preflight.sh",
+    "readiness": "bash translucid/scripts/readiness.sh",
+    "security:scan": "bash translucid/scripts/secret-scan.sh",
+    "candidate-safe-scan": "bash translucid/scripts/candidate-safe-scan.sh"
+  }
+}

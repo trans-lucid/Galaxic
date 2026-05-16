@@ -1,0 +1,87 @@
+{
+  "name": "Translucid Eval Base",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [
+    3000,
+    5173,
+    6006,
+    8080,
+    8081,
+    8088,
+    5432,
+    6379,
+    4566,
+    54321,
+    54323,
+    4000,
+    8888,
+    5000
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend"
+    },
+    "5173": {
+      "label": "Vite"
+    },
+    "6006": {
+      "label": "Storybook"
+    },
+    "8080": {
+      "label": "API"
+    },
+    "8081": {
+      "label": "Mock API"
+    },
+    "8088": {
+      "label": "Local Router"
+    },
+    "5432": {
+      "label": "Postgres"
+    },
+    "6379": {
+      "label": "Redis"
+    },
+    "4566": {
+      "label": "LocalStack"
+    },
+    "54321": {
+      "label": "Supabase API"
+    },
+    "54323": {
+      "label": "Supabase Studio"
+    },
+    "4000": {
+      "label": "Firebase Emulator UI"
+    },
+    "8888": {
+      "label": "JupyterLab"
+    },
+    "5000": {
+      "label": "MLflow"
+    }
+  },
+  "postCreateCommand": "npm install && bash scripts/doctor.sh || true"
+}

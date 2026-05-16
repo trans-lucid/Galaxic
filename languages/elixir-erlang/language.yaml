@@ -1,0 +1,26 @@
+id: elixir-erlang
+display_name: Elixir / Erlang
+priority: 40
+detect:
+  files:
+    - mix.exs
+    - rebar.config
+  extensions:
+    - .ex
+    - .exs
+    - .erl
+    - .hrl
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - mix test
+  fallback: []
+lint_commands: []
+build_commands:
+  - mix compile
+dev_commands:
+  - mix phx.server
+candidate_safe: true
+notes:
+  - Expansion overlay.

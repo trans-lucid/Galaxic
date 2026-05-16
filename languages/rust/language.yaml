@@ -1,0 +1,27 @@
+id: rust
+display_name: Rust
+priority: 75
+detect:
+  files:
+    - Cargo.toml
+    - Cargo.lock
+  extensions:
+    - .rs
+  dependencies: []
+tools:
+  rustup:
+    toolchain: stable
+test_commands:
+  preferred:
+    - cargo test
+  fallback:
+    - cargo test
+lint_commands:
+  - cargo clippy --all-targets -- -D warnings
+build_commands:
+  - cargo build
+dev_commands:
+  - cargo run
+candidate_safe: true
+notes:
+  - Keep generated fixtures small enough for Codespaces.

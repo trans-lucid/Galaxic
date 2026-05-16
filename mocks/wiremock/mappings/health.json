@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/health"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "ok": true,
+      "service": "wiremock"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

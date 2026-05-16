@@ -1,0 +1,31 @@
+id: sql
+display_name: SQL / PostgreSQL
+priority: 90
+detect:
+  files:
+    - dbt_project.yml
+    - schema.sql
+    - seed.sql
+    - database/migrations
+    - database/pgtap
+  extensions:
+    - .sql
+  dependencies:
+    - pgtap
+    - dbt
+tools:
+  apt:
+    - postgresql-client
+test_commands:
+  preferred:
+    - npm run test:sql
+    - dbt test
+  fallback:
+    - psql "$DATABASE_URL" -f database/pgtap/001_example.sql
+lint_commands: []
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Use pgTAP for database unit tests.
+  - Use dbt for analytics and data-engineering tests.

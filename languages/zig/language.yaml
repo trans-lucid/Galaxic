@@ -1,0 +1,21 @@
+id: zig
+display_name: Zig
+priority: 35
+detect:
+  files:
+    - build.zig
+  extensions:
+    - .zig
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - zig build test
+  fallback: []
+lint_commands: []
+build_commands:
+  - zig build
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.

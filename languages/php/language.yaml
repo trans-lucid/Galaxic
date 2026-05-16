@@ -1,0 +1,30 @@
+id: php
+display_name: PHP
+priority: 65
+detect:
+  files:
+    - composer.json
+    - composer.lock
+  extensions:
+    - .php
+  dependencies:
+    - phpunit
+    - laravel/framework
+tools:
+  apt:
+    - php-cli
+    - composer
+test_commands:
+  preferred:
+    - composer test
+    - vendor/bin/phpunit
+  fallback:
+    - vendor/bin/phpunit
+lint_commands: []
+build_commands:
+  - composer install
+dev_commands:
+  - php artisan serve --host=0.0.0.0
+candidate_safe: true
+notes:
+  - Laravel tasks should use local dummy env values only.

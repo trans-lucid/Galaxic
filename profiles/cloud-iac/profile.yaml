@@ -1,0 +1,42 @@
+id: cloud-iac
+display_name: Cloud / IaC
+description: OpenTofu/Terraform-compatible tasks with LocalStack and deployment dry-runs.
+domains:
+  - devops
+  - sre
+  - cloud
+  - platform
+  - infrastructure
+required_languages:
+  - terraform-hcl
+optional_languages:
+  - shell-devops
+  - python
+  - go
+compose_modules:
+  - base
+  - localstack
+ports:
+  localstack: 4566
+commands:
+  start: npm run env:start
+  validate: npm run infra:validate
+  plan_local: npm run infra:plan:local
+  apply_local: npm run infra:apply:local
+  test_public: npm run test
+  test_infra: npm run test:infra
+  deploy_dry_run: npm run deploy:dry-run
+env:
+  AWS_ACCESS_KEY_ID: test
+  AWS_SECRET_ACCESS_KEY: test
+  AWS_REGION: us-east-1
+  AWS_ENDPOINT_URL: http://localstack:4566
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - localstack reachable
+  - tofu validate passes
+  - tofu test passes when tests exist
+  - local plan succeeds

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Translucid Language Overlay",
+  "type": "object",
+  "required": [
+    "id",
+    "display_name",
+    "detect",
+    "tools",
+    "test_commands",
+    "candidate_safe"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "detect": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "object"
+    },
+    "test_commands": {
+      "type": "object"
+    },
+    "lint_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "build_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dev_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "generated_scripts": {
+      "type": "object"
+    },
+    "candidate_safe": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

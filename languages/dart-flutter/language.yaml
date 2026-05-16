@@ -1,0 +1,25 @@
+id: dart-flutter
+display_name: Dart / Flutter Web
+priority: 45
+detect:
+  files:
+    - pubspec.yaml
+  extensions:
+    - .dart
+  dependencies:
+    - flutter
+tools: {}
+test_commands:
+  preferred:
+    - flutter test
+    - dart test
+  fallback: []
+lint_commands:
+  - dart analyze
+build_commands:
+  - flutter build web
+dev_commands:
+  - flutter run -d web-server --web-hostname 0.0.0.0
+candidate_safe: true
+notes:
+  - Prefer Flutter Web for candidate-visible previews.

@@ -1,0 +1,27 @@
+id: go
+display_name: Go
+priority: 75
+detect:
+  files:
+    - go.mod
+    - go.sum
+  extensions:
+    - .go
+  dependencies: []
+tools:
+  mise:
+    go: "1.23"
+test_commands:
+  preferred:
+    - go test ./...
+  fallback:
+    - go test ./...
+lint_commands:
+  - go vet ./...
+build_commands:
+  - go build ./...
+dev_commands:
+  - go run ./cmd/server
+candidate_safe: true
+notes:
+  - Use Testcontainers Go for real-service integration tests.

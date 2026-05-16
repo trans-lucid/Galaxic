@@ -1,0 +1,30 @@
+id: firebase-local
+display_name: Firebase Local
+description: Firebase Emulator Suite profile for Auth, Firestore, Storage, Functions, Pub/Sub, and Hosting.
+domains:
+  - backend
+  - frontend
+  - full-stack
+required_languages:
+  - node-typescript
+optional_languages: []
+compose_modules:
+  - base
+  - firebase-emulators
+ports:
+  emulator_ui: 4000
+  firestore: 8080
+  auth: 9099
+commands:
+  start: npm run env:start
+  test_public: npm run test
+env:
+  FIREBASE_AUTH_EMULATOR_HOST: localhost:9099
+credential_policy:
+  candidate_credentials: local-only
+  production_credentials_allowed: false
+  credentialed_private_smoke_test_allowed: false
+readiness_checks:
+  - firebase emulator UI reachable
+notes:
+  - Expansion profile.

@@ -1,0 +1,21 @@
+id: julia
+display_name: Julia
+priority: 40
+detect:
+  files:
+    - Project.toml
+    - Manifest.toml
+  extensions:
+    - .jl
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - julia --project=. -e 'using Pkg; Pkg.test()'
+  fallback: []
+lint_commands: []
+build_commands: []
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.

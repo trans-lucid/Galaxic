@@ -1,0 +1,28 @@
+id: c-cpp
+display_name: C / C++
+priority: 50
+detect:
+  files:
+    - CMakeLists.txt
+    - Makefile
+  extensions:
+    - .c
+    - .cc
+    - .cpp
+    - .h
+    - .hpp
+  dependencies: []
+tools: {}
+test_commands:
+  preferred:
+    - ctest --test-dir build
+  fallback:
+    - make test
+lint_commands: []
+build_commands:
+  - cmake -S . -B build
+  - cmake --build build
+dev_commands: []
+candidate_safe: true
+notes:
+  - Expansion overlay.
