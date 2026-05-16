@@ -10,6 +10,7 @@ import type { DetectionResult, EnvironmentPlan } from "./types.js";
 import { loadDomainProfiles, loadLanguageOverlays } from "./utils/metadata.js";
 import { parseCsv } from "./utils/objects.js";
 import { repoRootFromImportMeta, resolvePath } from "./utils/paths.js";
+import { validateManifestFiles } from "./validate/manifest.js";
 
 const baseRoot = repoRootFromImportMeta(import.meta.url);
 const languageOverlays = loadLanguageOverlays(baseRoot);
@@ -157,6 +158,38 @@ program
     withCliErrors(async () => {
       runScript("scripts/preflight.sh", resolvePath(options.cwd));
     }),
+  );
+
+program
+  .command("validate")
+  .description("Validate Translucid environment and preview manifests")
+  .option("--cwd <dir>", "directory containing generated manifests", ".")
+  .option("--environment <file>", "environment manifest path", "translucid-environment.json")
+  .option("--preview <file>", "preview manifest path", "translucid-preview.json")
+  .option("--json", "print machine-readable JSON")
+  .action(
+    (options: { cwd: string; environment: string; preview: string; json?: boolean }) =>
+      withCliErrors(async () => {
+        const cwd = resolvePath(options.cwd);
+        const result = validateManifestFiles({
+          baseRoot,
+          environmentPath: path.resolve(cwd, options.environment),
+          previewPath: path.resolve(cwd, options.preview),
+        });
+
+        printResult(
+          result,
+          Boolean(options.json),
+          (value) =>
+            value.valid
+              ? "Translucid manifests are valid"
+              : `Translucid manifests are invalid:\n${value.issues.join("\n")}`,
+        );
+
+        if (!result.valid) {
+          process.exitCode = 1;
+        }
+      }),
   );
 
 program

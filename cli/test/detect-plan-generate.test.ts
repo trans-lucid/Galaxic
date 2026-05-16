@@ -8,6 +8,7 @@ import { detectStack } from "../src/detect/detect.js";
 import { generateEnvironment } from "../src/generate/generator.js";
 import { buildEnvironmentPlan } from "../src/plan/plan.js";
 import { loadDomainProfiles, loadLanguageOverlays } from "../src/utils/metadata.js";
+import { validateManifestFiles } from "../src/validate/manifest.js";
 
 const repoRoot = path.resolve(process.cwd(), "..");
 const languageOverlays = loadLanguageOverlays(repoRoot);
@@ -19,7 +20,7 @@ afterEach(async () => {
 });
 
 describe("v0.1 CLI flow", () => {
-  it("detects Node, SQL, Terraform, and shell evidence", async () => {
+  it("detects Node, Python, SQL, Terraform, and shell evidence", async () => {
     const sourceRoot = await makeTempDir();
     await fsExtra.ensureDir(path.join(sourceRoot, "src"));
     await fsExtra.ensureDir(path.join(sourceRoot, "database/migrations"));
@@ -31,6 +32,8 @@ describe("v0.1 CLI flow", () => {
       },
     });
     await fsExtra.writeFile(path.join(sourceRoot, "src/server.ts"), "export const ok = true;\n");
+    await fsExtra.writeFile(path.join(sourceRoot, "pyproject.toml"), "[project]\nname = \"demo\"\n");
+    await fsExtra.writeFile(path.join(sourceRoot, "app.py"), "print('ok')\n");
     await fsExtra.writeFile(
       path.join(sourceRoot, "database/migrations/001.sql"),
       "select 1;\n",
@@ -42,6 +45,7 @@ describe("v0.1 CLI flow", () => {
     const detectedIds = detection.detected_languages.map((language) => language.id);
 
     expect(detectedIds).toContain("node-typescript");
+    expect(detectedIds).toContain("python");
     expect(detectedIds).toContain("sql");
     expect(detectedIds).toContain("terraform-hcl");
     expect(detectedIds).toContain("shell-devops");
@@ -110,6 +114,13 @@ describe("v0.1 CLI flow", () => {
       test: "bash translucid/scripts/test-public.sh",
       "candidate-safe-scan": "bash translucid/scripts/candidate-safe-scan.sh",
     });
+
+    const validation = validateManifestFiles({
+      baseRoot: repoRoot,
+      environmentPath: path.join(targetRoot, "translucid-environment.json"),
+      previewPath: path.join(targetRoot, "translucid-preview.json"),
+    });
+    expect(validation).toEqual({ valid: true, issues: [] });
   });
 });
 

@@ -3,6 +3,7 @@ import path from "node:path";
 import fsExtra from "fs-extra";
 import YAML from "yaml";
 import type { DetectionResult, EnvironmentPlan } from "../types.js";
+import { validateManifestFiles } from "../validate/manifest.js";
 
 const GENERATED_SCRIPT_NAMES = [
   "candidate-safe-scan.sh",
@@ -41,6 +42,7 @@ export async function generateEnvironment(input: GenerateInput): Promise<void> {
   await writeCommandContracts(input);
   await writeCandidateReadme(input);
   await writeSafeExamples(input);
+  validateGeneratedManifests(input);
 }
 
 async function prepareTarget(input: GenerateInput): Promise<void> {
@@ -442,4 +444,16 @@ async function writeSafeExamples(input: GenerateInput): Promise<void> {
 async function writeJson(filePath: string, value: unknown): Promise<void> {
   await fsExtra.ensureDir(path.dirname(filePath));
   await fsExtra.writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function validateGeneratedManifests(input: GenerateInput): void {
+  const result = validateManifestFiles({
+    baseRoot: input.baseRoot,
+    environmentPath: path.join(input.targetRoot, "translucid-environment.json"),
+    previewPath: path.join(input.targetRoot, "translucid-preview.json"),
+  });
+
+  if (!result.valid) {
+    throw new Error(`Generated manifests failed schema validation:\n${result.issues.join("\n")}`);
+  }
 }
