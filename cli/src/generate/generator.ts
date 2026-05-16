@@ -424,9 +424,7 @@ async function writeCandidateReadme(input: GenerateInput): Promise<void> {
 
 async function writeSafeExamples(input: GenerateInput): Promise<void> {
   if (input.plan.profiles.includes("api-contract") || input.plan.profiles.includes("backend-api")) {
-    await fsExtra.copy(path.join(input.baseRoot, "api"), path.join(input.targetRoot, "api"), {
-      overwrite: true,
-    });
+    await copyDirectoryIfMissing(path.join(input.baseRoot, "api"), path.join(input.targetRoot, "api"));
   }
 
   if (
@@ -434,17 +432,14 @@ async function writeSafeExamples(input: GenerateInput): Promise<void> {
     input.plan.profiles.includes("backend-api") ||
     input.plan.profiles.includes("web-fullstack")
   ) {
-    await fsExtra.copy(
+    await copyDirectoryIfMissing(
       path.join(input.baseRoot, "database"),
       path.join(input.targetRoot, "database"),
-      { overwrite: true },
     );
   }
 
   if (input.plan.profiles.includes("cloud-iac")) {
-    await fsExtra.copy(path.join(input.baseRoot, "infra"), path.join(input.targetRoot, "infra"), {
-      overwrite: true,
-    });
+    await copyDirectoryIfMissing(path.join(input.baseRoot, "infra"), path.join(input.targetRoot, "infra"));
   }
 
   await fsExtra.ensureDir(path.join(input.targetRoot, "tests/public"));
@@ -516,6 +511,14 @@ function buildPublicTestScript(plan: EnvironmentPlan): string {
 
   lines.push("", "echo \"Galaxic public environment checks passed\"", "");
   return lines.join("\n");
+}
+
+async function copyDirectoryIfMissing(sourcePath: string, targetPath: string): Promise<void> {
+  if (await fsExtra.pathExists(targetPath)) {
+    return;
+  }
+
+  await fsExtra.copy(sourcePath, targetPath, { overwrite: false });
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {

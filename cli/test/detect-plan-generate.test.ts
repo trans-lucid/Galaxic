@@ -126,6 +126,41 @@ describe("v0.1 CLI flow", () => {
     });
     expect(validation).toEqual({ valid: true, issues: [] });
   });
+
+  it("does not overwrite project-owned API and database files", async () => {
+    const sourceRoot = await makeTempDir();
+    const targetRoot = await makeTempDir();
+    await fsExtra.ensureDir(path.join(sourceRoot, "api"));
+    await fsExtra.ensureDir(path.join(sourceRoot, "database/migrations"));
+    await fsExtra.writeFile(path.join(sourceRoot, "api/openapi.yaml"), "openapi: 3.0.3\ninfo:\n  title: Source API\n  version: 1.0.0\npaths: {}\n");
+    await fsExtra.writeFile(
+      path.join(sourceRoot, "database/migrations/001_source.sql"),
+      "select 'source-owned';\n",
+    );
+
+    const plan = buildEnvironmentPlan({
+      role: "backend-api",
+      explicitLanguages: ["node-typescript", "sql"],
+      detectedLanguages: [],
+      languageOverlays,
+      domainProfiles,
+    });
+
+    await generateEnvironment({
+      baseRoot: repoRoot,
+      targetRoot,
+      sourceRoot,
+      plan,
+      detection: { source: sourceRoot, detected_languages: [] },
+      force: true,
+    });
+
+    expect(fs.readFileSync(path.join(targetRoot, "api/openapi.yaml"), "utf8")).toContain(
+      "Source API",
+    );
+    expect(fs.existsSync(path.join(targetRoot, "database/migrations/001_source.sql"))).toBe(true);
+    expect(fs.existsSync(path.join(targetRoot, "database/migrations/001_init.sql"))).toBe(false);
+  });
 });
 
 async function makeTempDir(): Promise<string> {
