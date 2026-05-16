@@ -453,16 +453,69 @@ async function writeSafeExamples(input: GenerateInput): Promise<void> {
     "Public tests belong here. Private evaluator and hidden tests must stay outside candidate-facing material.\n",
   );
   const publicRunPath = path.join(input.targetRoot, "tests/public/run.sh");
-  await fsExtra.writeFile(
-    publicRunPath,
-    [
-      "#!/usr/bin/env bash",
-      "set -euo pipefail",
-      "echo \"No generated public tests have been added yet.\"",
-      "",
-    ].join("\n"),
-  );
+  await fsExtra.writeFile(publicRunPath, buildPublicTestScript(input.plan));
   await fsExtra.chmod(publicRunPath, 0o755);
+}
+
+function buildPublicTestScript(plan: EnvironmentPlan): string {
+  const lines = [
+    "#!/usr/bin/env bash",
+    "set -euo pipefail",
+    "",
+    "echo \"Running Galaxic public environment checks\"",
+    "",
+    "require_file() {",
+    "  if [ ! -f \"$1\" ]; then",
+    "    echo \"Missing required file: $1\"",
+    "    exit 1",
+    "  fi",
+    "}",
+    "",
+    "require_executable() {",
+    "  if [ ! -x \"$1\" ]; then",
+    "    echo \"Missing required executable: $1\"",
+    "    exit 1",
+    "  fi",
+    "}",
+    "",
+    "require_file galaxic-environment.json",
+    "require_file galaxic-preview.json",
+    "require_file compose.galaxic.yml",
+    "require_file package.json",
+    "require_executable galaxic/scripts/doctor.sh",
+    "require_executable galaxic/scripts/candidate-safe-scan.sh",
+    "",
+    "node -e \"const fs=require('fs'); const env=JSON.parse(fs.readFileSync('galaxic-environment.json','utf8')); if(!env.candidate_safe) throw new Error('environment must be candidate-safe'); if(env.requires_real_credentials) throw new Error('generated public env must not require real credentials');\"",
+    "node -e \"const fs=require('fs'); const preview=JSON.parse(fs.readFileSync('galaxic-preview.json','utf8')); if(!Array.isArray(preview.tabs)) throw new Error('preview tabs must be an array');\"",
+    "node -e \"const pkg=require('./package.json'); const required=['env:start','env:stop','env:reset','dev','test','ci:local','deploy:dry-run','doctor']; for (const script of required) { if (!pkg.scripts?.[script]) throw new Error('missing package script ' + script); }\"",
+    "",
+    "if command -v docker >/dev/null 2>&1; then",
+    "  docker compose -f compose.galaxic.yml config >/dev/null",
+    "fi",
+  ];
+
+  if (plan.profiles.includes("backend-api") || plan.profiles.includes("api-contract")) {
+    lines.push(
+      "",
+      "require_file api/openapi.yaml",
+      "require_file galaxic/mocks/wiremock/mappings/health.json",
+    );
+  }
+
+  if (
+    plan.profiles.includes("backend-api") ||
+    plan.profiles.includes("web-fullstack") ||
+    plan.profiles.includes("data-sql")
+  ) {
+    lines.push("", "require_file database/migrations/001_init.sql", "require_file database/seeds/seed.sql");
+  }
+
+  if (plan.profiles.includes("cloud-iac")) {
+    lines.push("", "require_file infra/opentofu/main.tf");
+  }
+
+  lines.push("", "echo \"Galaxic public environment checks passed\"", "");
+  return lines.join("\n");
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {

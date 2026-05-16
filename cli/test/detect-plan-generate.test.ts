@@ -96,6 +96,9 @@ describe("v0.1 CLI flow", () => {
     expect(fs.existsSync(path.join(targetRoot, "galaxic/scripts/env-start.sh"))).toBe(true);
     expect(fs.existsSync(path.join(targetRoot, "galaxic/mocks/wiremock/mappings/health.json"))).toBe(true);
     expect(fs.existsSync(path.join(targetRoot, "tests/public/run.sh"))).toBe(true);
+    expect(fs.readFileSync(path.join(targetRoot, "tests/public/run.sh"), "utf8")).toContain(
+      "Running Galaxic public environment checks",
+    );
 
     const environment = JSON.parse(
       fs.readFileSync(path.join(targetRoot, "galaxic-environment.json"), "utf8"),
